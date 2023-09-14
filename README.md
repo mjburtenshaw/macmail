@@ -3,12 +3,13 @@ macmail
 
 A library to streamline the composition of SMTP compliant emails using react-email templates to send off to mail vendors.
 
-![Static Badge](https://img.shields.io/badge/version-1.0.0-66023c)
+![Static Badge](https://img.shields.io/badge/version-1.0.1-66023c)
 
 Table of Contents
 ------------------
 
 - [Installation](#installation)
+- [Configuration](#configuration)
 - [Usage](#usage)
 - [Library](#library)
   - [Mail](#mail)
@@ -17,7 +18,6 @@ Table of Contents
     - [Body](#body)
     - [Attachments](#attachments)
     - [Letters](#letters)
-- []
 - [See Also](#see-also)
 
 Installation
@@ -26,6 +26,14 @@ Installation
 ```shell
 npm install @mjburtenshaw/macmail
 ```
+
+Configuration
+-------------
+
+Add the following environment variables to your project:
+- `PRODUCTION_DEV_RECIPIENT`: An email address. Required. Appended to BCC headers on production environments.
+- `MY_EMAIL_ADDRESS`: An email address. Optional. Only used in non-production environments.
+- `MY_NAME`: Any string. Optional. A companion to `MY_EMAIL_ADDRESS`.
 
 Usage
 ------
