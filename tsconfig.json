@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "jsx": "react",
+    "module": "NodeNext",
+    "outDir": "dist"
+  },
+  "exclude": ["lib/**/*.test.*"],
+  "include": ["lib/**/*", "index.ts"]
+}

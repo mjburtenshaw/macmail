@@ -1,0 +1,9 @@
+.DS_Store
+.vscode
+*.env
+*credentials*
+*token*
+coverage
+node_modules
+secrets
+tmp
