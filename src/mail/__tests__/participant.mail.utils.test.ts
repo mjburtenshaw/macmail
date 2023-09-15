@@ -239,37 +239,40 @@ describe('Paricipant utility tests', function testParticipantUtilities() {
       });
     });
     describe('When ENV is NOT production', () => {
-      describe('and MY_EMAIL_ADDRESS and MY_NAME are falsey', () => {
+      describe('and MACMAIL_MY_EMAIL_ADDRESS and MACMAIL_MY_NAME are falsey', () => {
         it('should return the configured production dev recipient', async () => {
           process.env.ENV = ENVS.LOCAL;
-          process.env.MY_EMAIL_ADDRESS = '';
-          process.env.MY_NAME = '';
+          process.env.MACMAIL_MY_EMAIL_ADDRESS = '';
+          process.env.MACMAIL_MY_NAME = '';
           const module = await import('../participant.mail.util');
           const devRecipient = module.participantMailUtil.getDevRecipient();
           expect(devRecipient).toBe(ADDRESSES.DEV);
         });
       });
-      describe('and MY_EMAIL_ADDRESS is truthy and MY_NAME is falsey', () => {
-        it('should return MY_EMAIL_ADDRESS', async () => {
+      describe('and MACMAIL_MY_EMAIL_ADDRESS is truthy and MACMAIL_MY_NAME is falsey', () => {
+        it('should return MACMAIL_MY_EMAIL_ADDRESS', async () => {
           process.env.ENV = ENVS.LOCAL;
-          process.env.MY_EMAIL_ADDRESS = ADDRESSES.TEST;
-          process.env.MY_NAME = '';
+          process.env.MACMAIL_MY_EMAIL_ADDRESS = ADDRESSES.TEST;
+          process.env.MACMAIL_MY_NAME = '';
           const module = await import('../participant.mail.util');
           const devRecipient = module.participantMailUtil.getDevRecipient();
-          expect(devRecipient).toBe(process.env.MY_EMAIL_ADDRESS);
+          expect(devRecipient).toBe(process.env.MACMAIL_MY_EMAIL_ADDRESS);
         });
       });
-      describe('and MY_EMAIL_ADDRESS and MY_NAME are truthy', () => {
+      describe('and MACMAIL_MY_EMAIL_ADDRESS and MACMAIL_MY_NAME are truthy', () => {
         it('should return an username-address combo', async () => {
           process.env.ENV = ENVS.LOCAL;
-          process.env.MY_EMAIL_ADDRESS = USERNAME_ADDRESSES.HARRY.address;
-          process.env.MY_NAME = USERNAME_ADDRESSES.HARRY.username;
+          process.env.MACMAIL_MY_EMAIL_ADDRESS =
+            USERNAME_ADDRESSES.HARRY.address;
+          process.env.MACMAIL_MY_NAME = USERNAME_ADDRESSES.HARRY.username;
           const module = await import('../participant.mail.util');
           const devRecipient =
             module.participantMailUtil.getDevRecipient() as UsernameAddressCombo;
           expect(devRecipient).toMatchObject<UsernameAddressCombo>;
-          expect(devRecipient.address).toBe(process.env.MY_EMAIL_ADDRESS);
-          expect(devRecipient.username).toBe(process.env.MY_NAME);
+          expect(devRecipient.address).toBe(
+            process.env.MACMAIL_MY_EMAIL_ADDRESS
+          );
+          expect(devRecipient.username).toBe(process.env.MACMAIL_MY_NAME);
         });
       });
     });

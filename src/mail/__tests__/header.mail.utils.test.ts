@@ -6,7 +6,7 @@ import {
 } from '../mail.constants';
 import { ComposeHeadersOptions, SmtpParticipant } from '../mail.types';
 
-const PRODUCTION_DEV_RECIPIENT = 'dev@example.com';
+const MACMAIL_PRODUCTION_DEV_RECIPIENT = 'dev@example.com';
 
 describe('Header utility tests', function testHeaderUtilities() {
   const TEST_PARTICIPANT = 'test@example.com';
@@ -31,34 +31,34 @@ describe('Header utility tests', function testHeaderUtilities() {
       });
     });
     describe('When ENV is not production', () => {
-      describe('and MY_EMAIL_ADDRESS is falsey', () => {
+      describe('and MACMAIL_MY_EMAIL_ADDRESS is falsey', () => {
         it('should overwrite the recipients with the configured production dev recipient', async () => {
           process.env.ENV = ENVS.LOCAL;
-          process.env.MY_EMAIL_ADDRESS = '';
-          const EXPECTED_TO_HEADER = `To: ${process.env.PRODUCTION_DEV_RECIPIENT}`;
+          process.env.MACMAIL_MY_EMAIL_ADDRESS = '';
+          const EXPECTED_TO_HEADER = `To: ${process.env.MACMAIL_PRODUCTION_DEV_RECIPIENT}`;
           const module = await import('../header.mail.util');
           const toHeader =
             module.headerMailUtil.composeToHeader(TEST_PARTICIPANT);
           expect(toHeader).toBe(EXPECTED_TO_HEADER);
         });
       });
-      describe('and MY_EMAIL_ADDRESS is defined', () => {
-        it('should overwrite the recipients with MY_EMAIL_ADDRESS', async () => {
+      describe('and MACMAIL_MY_EMAIL_ADDRESS is defined', () => {
+        it('should overwrite the recipients with MACMAIL_MY_EMAIL_ADDRESS', async () => {
           process.env.ENV = ENVS.LOCAL;
-          process.env.MY_EMAIL_ADDRESS = HARRY;
-          const EXPECTED_TO_HEADER = `To: ${process.env.MY_EMAIL_ADDRESS}`;
+          process.env.MACMAIL_MY_EMAIL_ADDRESS = HARRY;
+          const EXPECTED_TO_HEADER = `To: ${process.env.MACMAIL_MY_EMAIL_ADDRESS}`;
           const module = await import('../header.mail.util');
           const toHeader =
             module.headerMailUtil.composeToHeader(TEST_PARTICIPANT);
           expect(toHeader).toBe(EXPECTED_TO_HEADER);
         });
       });
-      describe('and MY_EMAIL_ADDRESS and MY_NAME is defined', () => {
-        it('should overwrite the recipients with MY_EMAIL_ADDRESS and MY_NAME', async () => {
+      describe('and MACMAIL_MY_EMAIL_ADDRESS and MACMAIL_MY_NAME is defined', () => {
+        it('should overwrite the recipients with MACMAIL_MY_EMAIL_ADDRESS and MACMAIL_MY_NAME', async () => {
           process.env.ENV = ENVS.LOCAL;
-          process.env.MY_EMAIL_ADDRESS = HARRY;
-          process.env.MY_NAME = 'Harry Potter';
-          const EXPECTED_TO_HEADER = `To: ${process.env.MY_NAME} <${process.env.MY_EMAIL_ADDRESS}>`;
+          process.env.MACMAIL_MY_EMAIL_ADDRESS = HARRY;
+          process.env.MACMAIL_MY_NAME = 'Harry Potter';
+          const EXPECTED_TO_HEADER = `To: ${process.env.MACMAIL_MY_NAME} <${process.env.MACMAIL_MY_EMAIL_ADDRESS}>`;
           const module = await import('../header.mail.util');
           const toHeader =
             module.headerMailUtil.composeToHeader(TEST_PARTICIPANT);
@@ -74,7 +74,7 @@ describe('Header utility tests', function testHeaderUtilities() {
           it('should add the configured production dev recipient to the Bcc header', async () => {
             process.env.ENV = ENVS.PRODUCTION;
             const blindCarbonCopy = [];
-            const EXPECTED_BCC_HEADER = `Bcc: ${process.env.PRODUCTION_DEV_RECIPIENT}`;
+            const EXPECTED_BCC_HEADER = `Bcc: ${process.env.MACMAIL_PRODUCTION_DEV_RECIPIENT}`;
             const module = await import('../header.mail.util');
             const bccHeader =
               module.headerMailUtil.composeBccHeader(blindCarbonCopy);
@@ -88,7 +88,7 @@ describe('Header utility tests', function testHeaderUtilities() {
               TEST_PARTICIPANT,
               TEST_PARTICIPANT,
             ];
-            const EXPECTED_BCC_HEADER = `Bcc: ${TEST_PARTICIPANT}, ${TEST_PARTICIPANT}, ${process.env.PRODUCTION_DEV_RECIPIENT}`;
+            const EXPECTED_BCC_HEADER = `Bcc: ${TEST_PARTICIPANT}, ${TEST_PARTICIPANT}, ${process.env.MACMAIL_PRODUCTION_DEV_RECIPIENT}`;
             const module = await import('../header.mail.util');
             const bccHeader =
               module.headerMailUtil.composeBccHeader(blindCarbonCopy);
@@ -100,7 +100,7 @@ describe('Header utility tests', function testHeaderUtilities() {
         it('should add the address to the header and the configured production dev recipient', async () => {
           process.env.ENV = ENVS.PRODUCTION;
           const blindCarbonCopy = TEST_PARTICIPANT;
-          const EXPECTED_BCC_HEADER = `Bcc: ${TEST_PARTICIPANT}, ${process.env.PRODUCTION_DEV_RECIPIENT}`;
+          const EXPECTED_BCC_HEADER = `Bcc: ${TEST_PARTICIPANT}, ${process.env.MACMAIL_PRODUCTION_DEV_RECIPIENT}`;
           const module = await import('../header.mail.util');
           const bccHeader =
             module.headerMailUtil.composeBccHeader(blindCarbonCopy);
@@ -111,7 +111,7 @@ describe('Header utility tests', function testHeaderUtilities() {
         it('should add the configured production dev recipient to the Bcc header', async () => {
           process.env.ENV = ENVS.PRODUCTION;
           const blindCarbonCopy = undefined;
-          const EXPECTED_BCC_HEADER = `Bcc: ${process.env.PRODUCTION_DEV_RECIPIENT}`;
+          const EXPECTED_BCC_HEADER = `Bcc: ${process.env.MACMAIL_PRODUCTION_DEV_RECIPIENT}`;
           const module = await import('../header.mail.util');
           const bccHeader =
             module.headerMailUtil.composeBccHeader(blindCarbonCopy);

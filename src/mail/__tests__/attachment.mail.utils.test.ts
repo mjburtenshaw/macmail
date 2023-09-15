@@ -3,7 +3,7 @@ import { BOUNDARY } from '../mail.constants';
 import type { AttachmentFile } from '../mail.types';
 
 describe('Attachment mail utility tests', function testAttachmentUtilities() {
-  const DESTINATION = 'lib/mail/__tests__/';
+  const DESTINATION = 'src/mail/__tests__/';
   // in practice, [Multer will generate a random filename without an extension](https://github.com/expressjs/multer#diskstorage)
   const FILES = {
     TEST_ICON_JPG: {

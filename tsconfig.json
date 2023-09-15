@@ -6,6 +6,6 @@
     "module": "NodeNext",
     "outDir": "dist"
   },
-  "exclude": ["lib/**/*.test.*"],
-  "include": ["lib/**/*", "index.ts"]
+  "exclude": ["src/**/*.test.*"],
+  "include": ["src/**/*"]
 }

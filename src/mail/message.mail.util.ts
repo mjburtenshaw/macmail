@@ -3,7 +3,7 @@ import { bodyMailUtil } from './body.mail.util';
 import { CONTENT_TYPES } from './mail.constants';
 import { headerMailUtil } from './header.mail.util';
 import type { ComposeMessageOptions, SmtpParticipant } from './mail.types';
-import type { RequestedLetter } from '../letter';
+import type { RequestedLetter } from '../../letter';
 
 export function composeMessage(
   sender: SmtpParticipant,

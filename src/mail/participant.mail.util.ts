@@ -1,7 +1,11 @@
 import type { MailAddress, SmtpParticipant } from './mail.types';
 
-const { ENV, MY_EMAIL_ADDRESS, MY_NAME, PRODUCTION_DEV_RECIPIENT } =
-  process.env;
+const {
+  ENV,
+  MACMAIL_MY_EMAIL_ADDRESS,
+  MACMAIL_MY_NAME,
+  MACMAIL_PRODUCTION_DEV_RECIPIENT,
+} = process.env;
 
 function isMailAddress(candidate: any): candidate is MailAddress {
   if (typeof candidate !== 'string') {
@@ -42,17 +46,17 @@ function isSmtpParticipant(candidate: any): candidate is SmtpParticipant {
 
 function getDevRecipient() {
   let meRecipient: SmtpParticipant =
-    (MY_EMAIL_ADDRESS as MailAddress) ||
-    (PRODUCTION_DEV_RECIPIENT as MailAddress);
-  if (MY_EMAIL_ADDRESS && MY_NAME) {
+    (MACMAIL_MY_EMAIL_ADDRESS as MailAddress) ||
+    (MACMAIL_PRODUCTION_DEV_RECIPIENT as MailAddress);
+  if (MACMAIL_MY_EMAIL_ADDRESS && MACMAIL_MY_NAME) {
     meRecipient = {
-      address: MY_EMAIL_ADDRESS as MailAddress,
-      username: MY_NAME,
+      address: MACMAIL_MY_EMAIL_ADDRESS as MailAddress,
+      username: MACMAIL_MY_NAME,
     };
   }
   const devRecipient =
     ENV === 'production'
-      ? (PRODUCTION_DEV_RECIPIENT as MailAddress)
+      ? (MACMAIL_PRODUCTION_DEV_RECIPIENT as MailAddress)
       : meRecipient;
   return devRecipient;
 }
