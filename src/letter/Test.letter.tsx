@@ -45,3 +45,5 @@ export function TestLetter() {
     </Html>
   );
 }
+
+export default TestLetter;

@@ -43,10 +43,122 @@ my_email_address: me@example.com
 my_name: Firstname Lastname
 ```
 
-Usage
-------s
+Our config will magically index files in your project ending in `.letter.tsx`.
 
-[`composeMessage()`](src/mail/message.mail.util.ts) is the main function of the library.
+See [Letters](#letters) for details on configuring letter templates. 
+
+Usage
+------
+
+[`composeMessage()`](src/mail/message.mail.util.ts) is the main function of the library:
+
+### Example
+
+```yaml
+# macmail.config.yml
+
+production_dev_recipient: dev.team@example.com
+my_email_address: me@example.com
+my_name: Firstname Lastname
+```
+
+```typescript
+// Test.letter.tsx
+
+import {
+  Body,
+  Container,
+  Head,
+  Heading,
+  Html,
+  Preview,
+} from '@react-email/components';
+import React from 'react';
+
+type TestLetterProps =  {
+  foo: string;
+  bar: string;
+}
+
+const bodyStyles = {
+  backgroundColor: '#ffffff',
+};
+
+const containerStyles = {
+  paddingLeft: '12px',
+  paddingRight: '12px',
+  margin: '0 auto',
+};
+
+const h1Styles = {
+  color: '#333',
+  fontFamily:
+    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+  fontSize: '24px',
+  fontWeight: 'bold',
+  margin: '40px 0',
+  padding: '0',
+};
+
+export const LETTER_NAME = 'TestLetter';
+
+export const requiredProps = ['foo', 'bar'];
+
+export function TestLetter({ foo, bar }: TestLetterProps) {
+  return (
+    <Html>
+      <Head />
+      <Preview>This is a test letter</Preview>
+      <Body style={bodyStyles}>
+        <Container style={containerStyles}>
+          <Heading style={h1Styles}>{`${foo}${bar}`}</Heading>
+        </Container>
+      </Body>
+    </Html>
+  );
+}
+
+export default TestLetter;
+
+```
+
+```typescript
+// useMacmail.ts
+
+import macmail, {
+  type ComposeMessageOptions,
+  type RequestedLetter
+} from '@mjburtenshaw/macmail';
+
+async function useMacmail(file: Express.Multer.File) {
+  const sender = 'sender@example.com';
+  const recipient = 'receiver@example.com'; // can support an array.
+  const subject = 'This is a Test!';
+  const requestedLetter: RequestedLetter = {
+    name: LETTER_NAME,
+    props: {
+      foo: 'fizz',
+      bar: 'buzz',
+    },
+  };
+  const attachment = await macmail.mail.buildAttachment(file);
+  const composeMessageOptions: ComposeMessageOptions = {
+    blindCarbonCopy: 'a-discrete-someone@example.com', // can support an array.
+    bodyContentType: mail.CONTENT_TYPES.TEXT_HTML,
+    carbonCopy: 'a-relevant-someone@example.com', // can support an array.
+    attachments: attachment, // can support an array.
+  };
+  const message = macmail.mail.composeMessage(
+    sender,
+    recipient,
+    subject,
+    requestedLetter,
+    composeMessageOptions
+  );
+  return message;
+}
+
+```
 
 Library
 -------
@@ -134,8 +246,6 @@ A letter template MUST have the following properties:
 - A React function component as the default export.
 - The same React function component as a named export.
 - An array of strings matching the keys of required component props assigned to a constant named `requiredProps` as a named export.
-
-A letter template SHOULD have the following properties:
 - A PascalCase filename followed by `.letter.tsx`, e.g. `FooBar.letter.tsx`
 
 See Also
