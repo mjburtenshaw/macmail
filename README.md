@@ -118,7 +118,7 @@ An attachment will always have a boundary because email's content type will alwa
 
 The objective of letter utilities is to faciliate the composition and formatting of letters to serve over SMTP.
 
-[`renderLetter`](lib/letter/letter.util.ts) serves as the main function of the utilities in this directory.
+[`render`](lib/letter/letter.util.ts) serves as the main function of the utilities in this directory.
 
 Letter templates are coded using [React Email](https://react.email/docs/introduction). They provide an elegant solution for creating email template on a server.
 

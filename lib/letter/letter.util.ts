@@ -39,7 +39,7 @@ export function buildRenderOptions(options: RenderLetterOptions | undefined) {
   return renderOptions;
 }
 
-export function renderLetter(
+export function render(
   requestedLetter: RequestedLetter,
   options?: RenderLetterOptions
 ) {

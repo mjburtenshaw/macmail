@@ -4,7 +4,7 @@ import {
   CONTENT_TYPE_HEADERS,
 } from './mail.constants';
 import {
-  letterUtil,
+  letter,
   type RenderLetterOptions,
   type RequestedLetter,
 } from '../letter';
@@ -23,7 +23,7 @@ function composeBody(
   const renderLetterOptions: RenderLetterOptions = {
     plainText: bodyContentType !== CONTENT_TYPES.TEXT_HTML,
   };
-  const body = letterUtil.renderLetter(requestedLetter, renderLetterOptions);
+  const body = letter.render(requestedLetter, renderLetterOptions);
   bodyLines.push(body);
   if (isMixedContent) {
     bodyLines.push('');
