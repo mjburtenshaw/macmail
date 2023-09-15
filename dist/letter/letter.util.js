@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.renderLetter = exports.buildRenderOptions = exports.validateProps = void 0;
+exports.render = exports.buildRenderOptions = exports.validateProps = void 0;
 const letter_constants_1 = require("./letter.constants");
 const reactEmail = __importStar(require("@react-email/render"));
 function validateProps(props, requiredProps, letterName) {
@@ -51,7 +51,7 @@ function buildRenderOptions(options) {
     return renderOptions;
 }
 exports.buildRenderOptions = buildRenderOptions;
-function renderLetter(requestedLetter, options) {
+function render(requestedLetter, options) {
     const { Component, requiredProps } = letter_constants_1.LETTERS[requestedLetter.name];
     validateProps(requestedLetter.props, requiredProps, requestedLetter.name);
     const renderOptions = buildRenderOptions(options);
@@ -59,4 +59,4 @@ function renderLetter(requestedLetter, options) {
     const letter = reactEmail.render(Letter, renderOptions);
     return letter;
 }
-exports.renderLetter = renderLetter;
+exports.render = render;

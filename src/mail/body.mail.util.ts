@@ -7,7 +7,7 @@ import {
   letter,
   type RenderLetterOptions,
   type RequestedLetter,
-} from '../../letter';
+} from '../letter';
 import type { BodyContentType } from './mail.types';
 
 function composeBody(

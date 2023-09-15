@@ -1,6 +1,6 @@
 import { composeMessage } from './message.mail.util';
 export type * from './mail.types';
-export declare const mailUtil: {
+export declare const mail: {
     buildAttachment: (file: import("./mail.types").BuildAttachmentFile) => Promise<import("./mail.types").AttachmentFile>;
     composeMessage: typeof composeMessage;
     isMailAddress: (candidate: any) => candidate is `${string}@${string}.${string}`;

@@ -12,7 +12,7 @@ function composeBody(isMixedContent, bodyContentType, requestedLetter) {
     const renderLetterOptions = {
         plainText: bodyContentType !== mail_constants_1.CONTENT_TYPES.TEXT_HTML,
     };
-    const body = letter_1.letterUtil.renderLetter(requestedLetter, renderLetterOptions);
+    const body = letter_1.letter.render(requestedLetter, renderLetterOptions);
     bodyLines.push(body);
     if (isMixedContent) {
         bodyLines.push('');

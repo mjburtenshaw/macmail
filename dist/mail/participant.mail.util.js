@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.participantMailUtil = void 0;
-const { ENV, MY_EMAIL_ADDRESS, MY_NAME, PRODUCTION_DEV_RECIPIENT } = process.env;
+const { ENV, MACMAIL_MY_EMAIL_ADDRESS, MACMAIL_MY_NAME, MACMAIL_PRODUCTION_DEV_RECIPIENT, } = process.env;
 function isMailAddress(candidate) {
     if (typeof candidate !== 'string') {
         return false;
@@ -38,16 +38,16 @@ function isSmtpParticipant(candidate) {
     return false;
 }
 function getDevRecipient() {
-    let meRecipient = MY_EMAIL_ADDRESS ||
-        PRODUCTION_DEV_RECIPIENT;
-    if (MY_EMAIL_ADDRESS && MY_NAME) {
+    let meRecipient = MACMAIL_MY_EMAIL_ADDRESS ||
+        MACMAIL_PRODUCTION_DEV_RECIPIENT;
+    if (MACMAIL_MY_EMAIL_ADDRESS && MACMAIL_MY_NAME) {
         meRecipient = {
-            address: MY_EMAIL_ADDRESS,
-            username: MY_NAME,
+            address: MACMAIL_MY_EMAIL_ADDRESS,
+            username: MACMAIL_MY_NAME,
         };
     }
     const devRecipient = ENV === 'production'
-        ? PRODUCTION_DEV_RECIPIENT
+        ? MACMAIL_PRODUCTION_DEV_RECIPIENT
         : meRecipient;
     return devRecipient;
 }

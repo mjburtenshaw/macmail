@@ -4,7 +4,7 @@ exports.headerMailUtil = void 0;
 const mail_constants_1 = require("./mail.constants");
 const participant_mail_util_1 = require("./participant.mail.util");
 const { ENV } = process.env;
-/** Replaces the recipients with you or the configured PRODUCTION_DEV_RECIPIENT in non-production environments */
+/** Replaces the recipients with you or the configured MACMAIL_PRODUCTION_DEV_RECIPIENT in non-production environments */
 function composeToHeader(recipients) {
     if (ENV !== mail_constants_1.ENVS.PRODUCTION) {
         recipients = participant_mail_util_1.participantMailUtil.devRecipients;
@@ -12,7 +12,7 @@ function composeToHeader(recipients) {
     const toHeader = `To: ${participant_mail_util_1.participantMailUtil.formatParticipants(recipients)}`;
     return toHeader;
 }
-/** Interpolates the configured PRODUCTION_DEV_RECIPIENT with other BCC recipients in production environments */
+/** Interpolates the configured MACMAIL_PRODUCTION_DEV_RECIPIENT with other BCC recipients in production environments */
 function composeBccHeader(blindCarbonCopy) {
     const allBcc = [];
     if (Array.isArray(blindCarbonCopy)) {
@@ -39,7 +39,7 @@ function composeSubjectHeader(subject) {
  * 1. From: When using Google as the mail vendor, they will override this with the authenticated user
  * 2. To
  * 3. CC (optional)
- * 4. BCC (optional): but we inject the configured PRODUCTION_DEV_RECIPIENT in production environments
+ * 4. BCC (optional): but we inject the configured MACMAIL_PRODUCTION_DEV_RECIPIENT in production environments
  * 5. Subject
  * 6. Content-Type headers
  */

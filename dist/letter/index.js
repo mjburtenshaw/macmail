@@ -23,14 +23,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mailUtil = void 0;
-const attachment_mail_util_1 = require("./attachment.mail.util");
-const message_mail_util_1 = require("./message.mail.util");
-const participant_mail_util_1 = require("./participant.mail.util");
-const constants = __importStar(require("./mail.constants"));
-exports.mailUtil = {
-    ...constants,
-    buildAttachment: attachment_mail_util_1.attachmentMailUtil.buildAttachment,
-    composeMessage: message_mail_util_1.composeMessage,
-    isMailAddress: participant_mail_util_1.participantMailUtil.isMailAddress,
-};
+exports.letter = void 0;
+const Test_letter_1 = require("./Test.letter");
+const letter_util_1 = require("./letter.util");
+const constants = __importStar(require("./letter.constants"));
+exports.letter = { render: letter_util_1.render, testLetterName: Test_letter_1.LETTER_NAME, ...constants };

@@ -33,3 +33,4 @@ function TestLetter() {
                 react_1.default.createElement(components_1.Heading, { style: h1Styles }, "Test")))));
 }
 exports.TestLetter = TestLetter;
+exports.default = TestLetter;
