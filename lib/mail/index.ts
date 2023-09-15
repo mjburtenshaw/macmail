@@ -5,7 +5,7 @@ import * as constants from './mail.constants';
 
 export type * from './mail.types';
 
-export const mailUtil = {
+export const mail = {
   ...constants,
   buildAttachment: attachmentMailUtil.buildAttachment,
   composeMessage,
