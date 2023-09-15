@@ -4,4 +4,4 @@ import * as constants from './letter.constants';
 
 export type * from './letter.types';
 
-export const letter = { LETTER_NAME, render, ...constants };
+export const letter = { render, testLetterName: LETTER_NAME, ...constants };
