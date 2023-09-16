@@ -30,4 +30,6 @@ export declare const macmail: {
         };
     };
 };
+export type * from './letter';
+export type * from './mail';
 export default macmail;

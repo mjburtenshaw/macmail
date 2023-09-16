@@ -9,4 +9,7 @@ export const macmail = {
   mail,
 };
 
+export type * from './letter';
+export type * from './mail';
+
 export default macmail;
