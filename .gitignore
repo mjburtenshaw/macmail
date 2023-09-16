@@ -4,6 +4,7 @@
 *credentials*
 *token*
 coverage
+macmail.config.yml
 node_modules
 secrets
 tmp
