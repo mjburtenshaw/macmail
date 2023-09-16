@@ -11,8 +11,9 @@ async function initialize() {
     mail = mailModule.mail;
 }
 initialize().then(() => {
-    module.exports = {
+    exports.macmail = {
         letter,
         mail,
     };
+    exports.default = exports.macmail;
 });
