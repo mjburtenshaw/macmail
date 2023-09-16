@@ -2,7 +2,6 @@ export declare const macmail: {
     letter: {
         LETTERS: import("./letter").Letters;
         render: typeof import("./letter/letter.util").render;
-        testLetterName: string;
     };
     mail: {
         buildAttachment: (file: import("./mail").BuildAttachmentFile) => Promise<import("./mail").AttachmentFile>;

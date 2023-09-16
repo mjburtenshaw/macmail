@@ -24,7 +24,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.letter = void 0;
-const Test_letter_1 = require("./Test.letter");
 const letter_util_1 = require("./letter.util");
 const constants = __importStar(require("./letter.constants"));
-exports.letter = { render: letter_util_1.render, testLetterName: Test_letter_1.LETTER_NAME, ...constants };
+exports.letter = { render: letter_util_1.render, ...constants };
