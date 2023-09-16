@@ -1,5 +1,5 @@
 import { buildRenderOptions, validateProps } from '../letter.util';
-import { LETTER_NAME } from '../Test.letter';
+import { LETTER_NAME } from './Test.letter';
 
 describe('Letter utility tests: ', function testLetterUtilities() {
   describe('validateProps tests', function testValidateProps() {
