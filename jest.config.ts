@@ -14,6 +14,10 @@ const config: Config = {
   preset: 'ts-jest',
   setupFiles: ['./jest.setup.ts'],
   testEnvironment: 'node',
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '<rootDir>/src/letter/__tests__/.*\\.letter\\..*',
+  ],
 };
 
 export default config;
