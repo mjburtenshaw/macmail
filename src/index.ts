@@ -14,8 +14,12 @@ async function initialize() {
 }
 
 initialize().then(() => {
-  module.exports = {
+  exports.macmail = {
     letter,
     mail,
   };
+  exports.default = exports.macmail;
 });
+
+export type * from './letter';
+export type * from './mail';
