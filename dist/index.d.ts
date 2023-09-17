@@ -7,11 +7,6 @@ export declare const macmail: {
         buildAttachment: (file: import("./mail").BuildAttachmentFile) => Promise<import("./mail").AttachmentFile>;
         composeMessage: (sender: import("./mail").SmtpParticipant, recipients: import("./mail").SmtpParticipant | import("./mail").SmtpParticipant[], subject: string, requestedLetter: import("./letter").RequestedLetter, options?: import("./mail").ComposeMessageOptions) => string;
         isMailAddress: (candidate: any) => candidate is `${string}@${string}.${string}`;
-        ENVS: {
-            readonly LOCAL: "local";
-            readonly PRODUCTION: "production";
-            readonly STAGING: "staging";
-        };
         BOUNDARY: {
             readonly START: "|||";
             readonly NEXT: "--|||";

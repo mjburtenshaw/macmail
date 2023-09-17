@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LETTERS = void 0;
+const global_constants_1 = require("../global.constants");
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 async function findLetterFiles(directory) {
@@ -35,9 +36,9 @@ async function importLetterModules(letterFiles) {
     return letterModules;
 }
 async function indexLetters() {
-    // Don't go all the way to the root directory to step down into `src`
-    // because `srcDir` must be `dist` in production, not `src`.
-    const srcDir = path_1.default.resolve(__dirname, '..', '..');
+    const localEnvs = [global_constants_1.globals.ENVS.LOCAL, global_constants_1.globals.ENVS.TEST];
+    const srcDirName = localEnvs.includes(process.env.NODE_ENV) ? 'src' : 'dist';
+    const srcDir = path_1.default.resolve(process.cwd(), srcDirName);
     const letterFiles = await findLetterFiles(srcDir);
     const letterModules = await importLetterModules(letterFiles);
     const letters = letterModules.reduce((acc, letterModule) => {

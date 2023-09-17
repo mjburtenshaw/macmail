@@ -1,11 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CONTENT_TYPE_HEADERS = exports.CONTENT_TYPES = exports.BOUNDARY = exports.ENVS = void 0;
-exports.ENVS = {
-    LOCAL: 'local',
-    PRODUCTION: 'production',
-    STAGING: 'staging',
-};
+exports.CONTENT_TYPE_HEADERS = exports.CONTENT_TYPES = exports.BOUNDARY = void 0;
 exports.BOUNDARY = {
     START: '|||',
     NEXT: '--|||',

@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.headerMailUtil = void 0;
 const mail_constants_1 = require("./mail.constants");
+const global_constants_1 = require("../global.constants");
 const participant_mail_util_1 = require("./participant.mail.util");
-const { ENV } = process.env;
 /** Replaces the recipients with you or the configured MACMAIL_PRODUCTION_DEV_RECIPIENT in non-production environments */
 function composeToHeader(recipients) {
-    if (ENV !== mail_constants_1.ENVS.PRODUCTION) {
+    if (process.env.ENV !== global_constants_1.globals.ENVS.PRODUCTION) {
         const devRecipient = participant_mail_util_1.participantMailUtil.getDevRecipient();
         recipients = devRecipient;
     }
@@ -22,7 +22,7 @@ function composeBccHeader(blindCarbonCopy) {
     else if (blindCarbonCopy) {
         allBcc.push(blindCarbonCopy);
     }
-    if (ENV === mail_constants_1.ENVS.PRODUCTION) {
+    if (process.env.ENV === global_constants_1.globals.ENVS.PRODUCTION) {
         const devRecipient = participant_mail_util_1.participantMailUtil.getDevRecipient();
         allBcc.push(devRecipient);
     }

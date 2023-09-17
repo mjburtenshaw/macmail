@@ -1,8 +1,3 @@
-export declare const ENVS: {
-    readonly LOCAL: "local";
-    readonly PRODUCTION: "production";
-    readonly STAGING: "staging";
-};
 export declare const BOUNDARY: {
     readonly START: "|||";
     readonly NEXT: "--|||";
