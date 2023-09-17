@@ -1,3 +1,4 @@
+import { globals } from '../global.constants';
 import fs from 'fs';
 import path from 'path';
 import type { Letters, LetterModule } from './letter.types';
@@ -36,9 +37,9 @@ async function importLetterModules(letterFiles: string[]) {
 export var LETTERS: Letters;
 
 async function indexLetters() {
-  // Don't go all the way to the root directory to step down into `src`
-  // because `srcDir` must be `dist` in production, not `src`.
-  const srcDir = path.resolve(__dirname, '..', '..');
+  const localEnvs = [globals.ENVS.LOCAL, globals.ENVS.TEST] as string[];
+  const srcDirName = localEnvs.includes(process.env.NODE_ENV) ? 'src' : 'dist';
+  const srcDir = path.resolve(process.cwd(), srcDirName);
   const letterFiles = await findLetterFiles(srcDir);
   const letterModules = await importLetterModules(letterFiles);
   const letters = letterModules.reduce((acc: Letters, letterModule) => {

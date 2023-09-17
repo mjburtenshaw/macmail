@@ -1,9 +1,3 @@
-export const ENVS = {
-  LOCAL: 'local',
-  PRODUCTION: 'production',
-  STAGING: 'staging',
-} as const;
-
 export const BOUNDARY = {
   START: '|||',
   NEXT: '--|||',

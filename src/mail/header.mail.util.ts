@@ -1,4 +1,5 @@
-import { CONTENT_TYPE_HEADERS, CONTENT_TYPES, ENVS } from './mail.constants';
+import { CONTENT_TYPE_HEADERS, CONTENT_TYPES } from './mail.constants';
+import { globals } from '../global.constants';
 import { participantMailUtil } from './participant.mail.util';
 import type {
   BodyContentType,
@@ -6,11 +7,9 @@ import type {
   SmtpParticipant,
 } from './mail.types';
 
-const { ENV } = process.env;
-
 /** Replaces the recipients with you or the configured MACMAIL_PRODUCTION_DEV_RECIPIENT in non-production environments */
 function composeToHeader(recipients: SmtpParticipant | SmtpParticipant[]) {
-  if (ENV !== ENVS.PRODUCTION) {
+  if (process.env.ENV !== globals.ENVS.PRODUCTION) {
     const devRecipient = participantMailUtil.getDevRecipient();
     recipients = devRecipient;
   }
@@ -28,7 +27,7 @@ function composeBccHeader(
   } else if (blindCarbonCopy) {
     allBcc.push(blindCarbonCopy);
   }
-  if (ENV === ENVS.PRODUCTION) {
+  if (process.env.ENV === globals.ENVS.PRODUCTION) {
     const devRecipient = participantMailUtil.getDevRecipient();
     allBcc.push(devRecipient);
   }

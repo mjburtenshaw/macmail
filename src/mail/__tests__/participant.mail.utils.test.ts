@@ -1,6 +1,6 @@
-import { ENVS } from '../mail.constants';
-import { SmtpParticipant, UsernameAddressCombo } from '../mail.types';
+import { globals } from '../../global.constants';
 import { participantMailUtil } from '../participant.mail.util';
+import { SmtpParticipant, UsernameAddressCombo } from '../mail.types';
 
 const ADDRESSES: {
   [key: string]: SmtpParticipant;
@@ -222,17 +222,17 @@ describe('Paricipant utility tests', function testParticipantUtilities() {
     });
   });
   describe('getDevRecipient tests', function testGetDevRecipient() {
-    const OLD_ENV = process.env;
+    const oldEnv = process.env;
     beforeEach(() => {
       jest.resetModules();
-      process.env = { ...OLD_ENV };
+      process.env = { ...oldEnv };
     });
     afterAll(() => {
-      process.env = OLD_ENV;
+      process.env = oldEnv;
     });
     describe('When ENV is production', () => {
       it('should return the configured production dev recipient', async () => {
-        process.env.ENV = ENVS.PRODUCTION;
+        process.env.ENV = globals.ENVS.PRODUCTION;
         const module = await import('../participant.mail.util');
         const devRecipient = await module.participantMailUtil.getDevRecipient();
         expect(devRecipient).toBe(ADDRESSES.DEV);
@@ -241,7 +241,7 @@ describe('Paricipant utility tests', function testParticipantUtilities() {
     describe('When ENV is NOT production', () => {
       describe('and MACMAIL_MY_EMAIL_ADDRESS and MACMAIL_MY_NAME are falsey', () => {
         it('should return the configured production dev recipient', async () => {
-          process.env.ENV = ENVS.LOCAL;
+          process.env.ENV = globals.ENVS.LOCAL;
           process.env.MACMAIL_MY_EMAIL_ADDRESS = '';
           process.env.MACMAIL_MY_NAME = '';
           const module = await import('../participant.mail.util');
@@ -252,7 +252,7 @@ describe('Paricipant utility tests', function testParticipantUtilities() {
       });
       describe('and MACMAIL_MY_EMAIL_ADDRESS is truthy and MACMAIL_MY_NAME is falsey', () => {
         it('should return MACMAIL_MY_EMAIL_ADDRESS', async () => {
-          process.env.ENV = ENVS.LOCAL;
+          process.env.ENV = globals.ENVS.LOCAL;
           process.env.MACMAIL_MY_EMAIL_ADDRESS = ADDRESSES.TEST as string;
           process.env.MACMAIL_MY_NAME = '';
           const module = await import('../participant.mail.util');
@@ -263,7 +263,7 @@ describe('Paricipant utility tests', function testParticipantUtilities() {
       });
       describe('and MACMAIL_MY_EMAIL_ADDRESS and MACMAIL_MY_NAME are truthy', () => {
         it('should return an username-address combo', async () => {
-          process.env.ENV = ENVS.LOCAL;
+          process.env.ENV = globals.ENVS.LOCAL;
           process.env.MACMAIL_MY_EMAIL_ADDRESS =
             USERNAME_ADDRESSES.HARRY.address;
           process.env.MACMAIL_MY_NAME = USERNAME_ADDRESSES.HARRY.username;
