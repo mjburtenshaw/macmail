@@ -1,25 +1,15 @@
+import { letter } from './letter';
+import { mail } from './mail';
 import { useConfig } from './useConfig';
 
-let letter: any;
-let mail: any;
+useConfig();
 
-async function initialize() {
-  await useConfig();
-
-  const letterModule = require('./letter');
-  const mailModule = require('./mail');
-
-  letter = letterModule.letter;
-  mail = mailModule.mail;
-}
-
-initialize().then(() => {
-  exports.macmail = {
-    letter,
-    mail,
-  };
-  exports.default = exports.macmail;
-});
+export const macmail = {
+  letter,
+  mail,
+};
 
 export type * from './letter';
 export type * from './mail';
+
+export default macmail;

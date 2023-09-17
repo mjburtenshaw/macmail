@@ -5,7 +5,7 @@ import { headerMailUtil } from './header.mail.util';
 import type { ComposeMessageOptions, SmtpParticipant } from './mail.types';
 import type { RequestedLetter } from '../letter';
 
-export function composeMessage(
+function composeMessage(
   sender: SmtpParticipant,
   recipients: SmtpParticipant | SmtpParticipant[],
   subject: string,
@@ -42,4 +42,4 @@ export function composeMessage(
   return message;
 }
 
-const messageMailUtil = { composeMessage };
+export const messageMailUtil = { composeMessage };

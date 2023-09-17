@@ -11,7 +11,8 @@ const { ENV } = process.env;
 /** Replaces the recipients with you or the configured MACMAIL_PRODUCTION_DEV_RECIPIENT in non-production environments */
 function composeToHeader(recipients: SmtpParticipant | SmtpParticipant[]) {
   if (ENV !== ENVS.PRODUCTION) {
-    recipients = participantMailUtil.devRecipients;
+    const devRecipient = participantMailUtil.getDevRecipient();
+    recipients = devRecipient;
   }
   const toHeader = `To: ${participantMailUtil.formatParticipants(recipients)}`;
   return toHeader;
@@ -28,9 +29,8 @@ function composeBccHeader(
     allBcc.push(blindCarbonCopy);
   }
   if (ENV === ENVS.PRODUCTION) {
-    participantMailUtil.devRecipients.forEach((devRecipient) =>
-      allBcc.push(devRecipient)
-    );
+    const devRecipient = participantMailUtil.getDevRecipient();
+    allBcc.push(devRecipient);
   }
   const bccHeader = allBcc.length
     ? `Bcc: ${participantMailUtil.formatParticipants(allBcc)}`

@@ -1,12 +1,5 @@
 import type { MailAddress, SmtpParticipant } from './mail.types';
 
-const {
-  ENV,
-  MACMAIL_MY_EMAIL_ADDRESS,
-  MACMAIL_MY_NAME,
-  MACMAIL_PRODUCTION_DEV_RECIPIENT,
-} = process.env;
-
 function isMailAddress(candidate: any): candidate is MailAddress {
   if (typeof candidate !== 'string') {
     return false;
@@ -45,6 +38,12 @@ function isSmtpParticipant(candidate: any): candidate is SmtpParticipant {
 }
 
 function getDevRecipient() {
+  const {
+    ENV,
+    MACMAIL_MY_EMAIL_ADDRESS,
+    MACMAIL_MY_NAME,
+    MACMAIL_PRODUCTION_DEV_RECIPIENT,
+  } = process.env;
   let meRecipient: SmtpParticipant =
     (MACMAIL_MY_EMAIL_ADDRESS as MailAddress) ||
     (MACMAIL_PRODUCTION_DEV_RECIPIENT as MailAddress);
@@ -60,10 +59,6 @@ function getDevRecipient() {
       : meRecipient;
   return devRecipient;
 }
-
-const devRecipient = getDevRecipient();
-
-const devRecipients = [devRecipient];
 
 function formatParticipant(participant: SmtpParticipant) {
   if (typeof participant === 'string') {
@@ -84,7 +79,6 @@ function formatParticipants(
 }
 
 export const participantMailUtil = {
-  devRecipients,
   formatParticipant,
   formatParticipants,
   getDevRecipient,

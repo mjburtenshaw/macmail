@@ -6,8 +6,6 @@ import {
 } from '../mail.constants';
 import { ComposeHeadersOptions, SmtpParticipant } from '../mail.types';
 
-const MACMAIL_PRODUCTION_DEV_RECIPIENT = 'dev@example.com';
-
 describe('Header utility tests', function testHeaderUtilities() {
   const TEST_PARTICIPANT = 'test@example.com';
   const HARRY = 'harry@hsww.edu';
