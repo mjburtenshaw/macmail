@@ -1,19 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.macmail = void 0;
+const letter_1 = require("./letter");
+const mail_1 = require("./mail");
 const useConfig_1 = require("./useConfig");
-let letter;
-let mail;
-async function initialize() {
-    await (0, useConfig_1.useConfig)();
-    const letterModule = require('./letter');
-    const mailModule = require('./mail');
-    letter = letterModule.letter;
-    mail = mailModule.mail;
-}
-initialize().then(() => {
-    exports.macmail = {
-        letter,
-        mail,
-    };
-    exports.default = exports.macmail;
-});
+(0, useConfig_1.useConfig)();
+exports.macmail = {
+    letter: letter_1.letter,
+    mail: mail_1.mail,
+};
+exports.default = exports.macmail;

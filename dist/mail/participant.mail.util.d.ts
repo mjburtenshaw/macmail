@@ -5,7 +5,6 @@ declare function getDevRecipient(): SmtpParticipant;
 declare function formatParticipant(participant: SmtpParticipant): string;
 declare function formatParticipants(participantEntry: SmtpParticipant | SmtpParticipant[]): string;
 export declare const participantMailUtil: {
-    devRecipients: SmtpParticipant[];
     formatParticipant: typeof formatParticipant;
     formatParticipants: typeof formatParticipants;
     getDevRecipient: typeof getDevRecipient;

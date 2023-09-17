@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.composeMessage = void 0;
+exports.messageMailUtil = void 0;
 const attachment_mail_util_1 = require("./attachment.mail.util");
 const body_mail_util_1 = require("./body.mail.util");
 const mail_constants_1 = require("./mail.constants");
@@ -20,5 +20,4 @@ function composeMessage(sender, recipients, subject, requestedLetter, options) {
     const message = letterLines.join('\n');
     return message;
 }
-exports.composeMessage = composeMessage;
-const messageMailUtil = { composeMessage };
+exports.messageMailUtil = { composeMessage };

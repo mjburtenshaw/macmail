@@ -31,6 +31,6 @@ const constants = __importStar(require("./mail.constants"));
 exports.mail = {
     ...constants,
     buildAttachment: attachment_mail_util_1.attachmentMailUtil.buildAttachment,
-    composeMessage: message_mail_util_1.composeMessage,
+    composeMessage: message_mail_util_1.messageMailUtil.composeMessage,
     isMailAddress: participant_mail_util_1.participantMailUtil.isMailAddress,
 };

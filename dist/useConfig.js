@@ -33,7 +33,9 @@ function applyConfig(config) {
     }
 }
 async function useConfig() {
-    const config = await readConfig();
-    applyConfig(config);
+    if (process.env.NODE_ENV !== 'test') {
+        const config = await readConfig();
+        applyConfig(config);
+    }
 }
 exports.useConfig = useConfig;
