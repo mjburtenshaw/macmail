@@ -7,7 +7,7 @@ export type AttachmentFile = {
     name: string;
 };
 export type BodyContentType = Exclude<ContentType, typeof CONTENT_TYPES.MULTIPART_MIXED>;
-export type BuildAttachmentFile = Pick<Express.Multer.File, 'destination' | 'filename' | 'mimetype' | 'originalname'>;
+export type BuildAttachmentFile = Pick<Express.Multer.File, 'destination' | 'filename' | 'mimetype' | 'originalname' | 'path'>;
 export type MailAddress = `${string}@${string}.${string}`;
 export type UsernameAddressCombo = {
     address: MailAddress;

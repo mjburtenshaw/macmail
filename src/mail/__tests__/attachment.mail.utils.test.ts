@@ -11,12 +11,14 @@ describe('Attachment mail utility tests', function testAttachmentUtilities() {
       filename: 'test-icon.jpg',
       mimetype: 'image/jpg',
       originalname: 'test-icon.jpg',
+      path: `${DESTINATION}/test-icon.jpg`,
     },
     TEST_ICON_PNG: {
       destination: DESTINATION,
       filename: 'test-icon.png',
       mimetype: 'image/png',
       originalname: 'test-icon.png',
+      path: `${DESTINATION}/test-icon.png`,
     },
   };
   const TEST_ICON_JPG_ATTACHMENT = {

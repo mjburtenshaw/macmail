@@ -1,6 +1,6 @@
 {
   "name": "@mjburtenshaw/macmail",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "A library to streamline the composition of SMTP compliant emails using react-email templates to send off to mail vendors.",
   "main": "dist/index.js",
   "files": [
