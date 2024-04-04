@@ -14,7 +14,7 @@ export type BodyContentType = Exclude<
 
 export type BuildAttachmentFile = Pick<
   Express.Multer.File,
-  'destination' | 'filename' | 'mimetype' | 'originalname'
+  'destination' | 'filename' | 'mimetype' | 'originalname' | 'path'
 >;
 
 export type MailAddress = `${string}@${string}.${string}`;

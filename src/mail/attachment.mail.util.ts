@@ -3,11 +3,8 @@ import fs from 'fs/promises';
 import type { AttachmentFile, BuildAttachmentFile } from './mail.types';
 
 async function buildAttachment(file: BuildAttachmentFile) {
-  const { destination, filename, mimetype, originalname } = file;
-  const cwd = process.cwd();
-  // destination is suffixed with a slash by Multer
-  const fileUri = `${cwd}/${destination}${filename}`;
-  const fileBuf = await fs.readFile(fileUri);
+  const { mimetype, originalname, path } = file;
+  const fileBuf = await fs.readFile(path);
   const fileData = fileBuf.toString('base64');
   const attachment: AttachmentFile = {
     data: fileData,

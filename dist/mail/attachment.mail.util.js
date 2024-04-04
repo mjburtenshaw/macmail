@@ -7,11 +7,8 @@ exports.attachmentMailUtil = void 0;
 const mail_constants_1 = require("./mail.constants");
 const promises_1 = __importDefault(require("fs/promises"));
 async function buildAttachment(file) {
-    const { destination, filename, mimetype, originalname } = file;
-    const cwd = process.cwd();
-    // destination is suffixed with a slash by Multer
-    const fileUri = `${cwd}/${destination}${filename}`;
-    const fileBuf = await promises_1.default.readFile(fileUri);
+    const { mimetype, originalname, path } = file;
+    const fileBuf = await promises_1.default.readFile(path);
     const fileData = fileBuf.toString('base64');
     const attachment = {
         data: fileData,
