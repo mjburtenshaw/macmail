@@ -9,4 +9,5 @@ exports.macmail = {
     letter: letter_1.letter,
     mail: mail_1.mail,
 };
-exports.default = exports.macmail;
+// CommonJS export syntax allows EcmaScript default imports to work after it's compiled.
+module.exports = exports.macmail;

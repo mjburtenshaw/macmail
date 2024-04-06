@@ -12,4 +12,5 @@ export const macmail = {
 export type * from './letter';
 export type * from './mail';
 
-export default macmail;
+// CommonJS export syntax allows EcmaScript default imports to work after it's compiled.
+module.exports = macmail;

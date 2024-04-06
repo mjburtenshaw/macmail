@@ -3,7 +3,7 @@ macmail
 
 A library to streamline the composition of SMTP compliant emails using react-email templates to send off to mail vendors.
 
-![Static Badge](https://img.shields.io/badge/version-1.1.8-66023c)
+![Static Badge](https://img.shields.io/badge/version-1.1.9-66023c)
 
 Table of Contents
 ------------------
@@ -17,7 +17,7 @@ Table of Contents
     - [Headers](#headers)
     - [Body](#body)
     - [Attachments](#attachments)
-    - [Letters](#letters)
+  - [Letters](#letters)
 - [See Also](#see-also)
 
 Installation
@@ -215,7 +215,7 @@ SMTP requires the following headers:
 
 `composeBody` is the main function of [the body utilities](src/mail/body.mail.util.ts).
 
-The body is required to render [a letter](#letters) merged with data. Preferrably the body content type is HTML, but plain text is available.
+The body is required to render [a letter](#letters) merged with data. Preferably the body content type is HTML, but plain text is available.
 
 If the email has mixed content, the body section must have its own Content-Type headers and boundary.
 
@@ -236,7 +236,7 @@ An attachment will always have a boundary because email's content type will alwa
 
 ### Letters
 
-The objective of letter utilities is to faciliate the composition and formatting of letters to serve over SMTP.
+The objective of letter utilities is to facilitate the composition and formatting of letters to serve over SMTP.
 
 [`render`](src/letter/letter.util.ts) serves as the main function of the utilities in this directory.
 
