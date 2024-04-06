@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.indexLetters = exports.LETTERS = void 0;
+exports.LETTERS = void 0;
 const global_constants_1 = require("../global.constants");
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
@@ -51,4 +51,4 @@ async function indexLetters() {
     }, {});
     exports.LETTERS = letters;
 }
-exports.indexLetters = indexLetters;
+indexLetters();

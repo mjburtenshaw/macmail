@@ -3,8 +3,6 @@ import fs from 'fs';
 import path from 'path';
 import type { Letters, LetterModule } from './letter.types';
 
-export var LETTERS: Letters;
-
 async function findLetterFiles(directory: string) {
   const letterFiles = [];
   try {
@@ -36,7 +34,9 @@ async function importLetterModules(letterFiles: string[]) {
   return letterModules;
 }
 
-export async function indexLetters() {
+export var LETTERS: Letters;
+
+async function indexLetters() {
   const localEnvs = [globals.ENVS.LOCAL, globals.ENVS.TEST] as string[];
   const srcDirName = localEnvs.includes(process.env.NODE_ENV) ? 'src' : 'dist';
   const srcDir = path.resolve(process.cwd(), srcDirName);
@@ -52,3 +52,5 @@ export async function indexLetters() {
   }, {});
   LETTERS = letters;
 }
+
+indexLetters();
