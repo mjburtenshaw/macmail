@@ -1,5 +1,8 @@
+declare function init(): Promise<void>;
 export declare const macmail: {
+    init: typeof init;
     letter: {
+        indexLetters(): Promise<void>;
         LETTERS: import("./letter").Letters;
         render: typeof import("./letter/letter.util").render;
     };

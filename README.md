@@ -3,13 +3,14 @@ macmail
 
 A library to streamline the composition of SMTP compliant emails using react-email templates to send off to mail vendors.
 
-![Static Badge](https://img.shields.io/badge/version-1.1.8-66023c)
+![Static Badge](https://img.shields.io/badge/version-2.0.0-66023c)
 
 Table of Contents
 ------------------
 
 - [Installation](#installation)
 - [Configuration](#configuration)
+- [Initialization](#initialization)
 - [Usage](#usage)
 - [Library](#library)
   - [Mail](#mail)
@@ -17,14 +18,15 @@ Table of Contents
     - [Headers](#headers)
     - [Body](#body)
     - [Attachments](#attachments)
-    - [Letters](#letters)
+  - [Letters](#letters)
 - [See Also](#see-also)
 
 Installation
 ------------
 
 ```shell
-npm install @mjburtenshaw/macmail
+npm install @mjburtenshaw/macmail @react-email/components
+npm install --save-dev @types/react
 ```
 
 Configuration
@@ -33,24 +35,24 @@ Configuration
 Add a `macmail.config.yml` to your project's root directory:
 
 ```yaml
-# Required. An email address appended to BCC headers on production environments.
-production_dev_recipient: dev.team@example.com
-
-# Optional. An email address only used in non-production environments.
-my_email_address: me@example.com
-
-# Optional. A string. A companion to my_email_address.
-my_name: Firstname Lastname
+production_dev_recipient: dev.team@example.com # Required. An email address appended to BCC headers on production environments.
+my_email_address: me@example.com # Optional. An email address only used in non-production environments.
+my_name: Firstname Lastname # Optional. A companion to my_email_address.
 ```
 
-Our config will magically index files in your project ending in `.letter.tsx`.
+Initialization
+---------------
 
-See [Letters](#letters) for details on configuring letter templates. 
+As soon as possible in your program, you must call [`macmail.init()`](/src/index.ts).
+
+This will load your configuration file and index files in your project ending in `.letter.tsx`.
+
+See [Letters](#letters) for details on configuring letter templates.
 
 Usage
 ------
 
-[`composeMessage()`](src/mail/message.mail.util.ts) is the main function of the library:
+[`macmail.mail.composeMessage()`](src/mail/message.mail.util.ts) is the main function of the library:
 
 ### Example
 
@@ -144,7 +146,7 @@ async function useMacmail(file: Express.Multer.File) {
   const attachment = await macmail.mail.buildAttachment(file);
   const composeMessageOptions: ComposeMessageOptions = {
     blindCarbonCopy: 'a-discrete-someone@example.com', // can support an array.
-    bodyContentType: mail.CONTENT_TYPES.TEXT_HTML,
+    bodyContentType: macmail.mail.CONTENT_TYPES.TEXT_HTML,
     carbonCopy: 'a-relevant-someone@example.com', // can support an array.
     attachments: attachment, // can support an array.
   };
@@ -165,13 +167,13 @@ Library
 
 ### Mail
 
-The purpose of mail utilities is to parse input in a way that's [Simple Mail Transfer Protocol (SMTP) compliant](https://datatracker.ietf.org/doc/html/rfc5321).
+The purpose of mail utilities are to parse input in a way that's [Simple Mail Transfer Protocol (SMTP) compliant](https://datatracker.ietf.org/doc/html/rfc5321).
 
-[`composeMessage`](src/mail/message.mail.util.ts) is the main function of the utility library.
+[`composeMessage()`](src/mail/message.mail.util.ts) is the main function of the utility library.
 
 #### Participants
 
-`formatParticipants` is the main function of [the participant utilities](src/mail/participant.mail.util.ts).
+`formatParticipants()` is the main function of [the participant utilities](src/mail/participant.mail.util.ts).
 
 The API uses participants defined using an address, e.g., `test@example.com`, or a username-address combination in JSON:
 
@@ -190,7 +192,7 @@ We delimit multiple participants using a comma and space. It is valid to have a 
 
 #### Headers
 
-`composeHeaders` is the main function of [the header utilities](src/mail/header.mail.util.ts).
+`composeHeaders()` is the main function of [the header utilities](src/mail/header.mail.util.ts).
 
 SMTP requires the following headers:
 1. From: an SMTP participant.
@@ -207,15 +209,15 @@ SMTP requires the following headers:
 
 🤷‍♂️ CC and BCC are optional headers. Content-Transfer-Encoding and a boundary are required, depending on the MIME type.
 
-🎯 We want to prevent misfires to recipients when operating in non-production environments, so we will override the recipients with the developer's address if it's defined, otherwise a configured MACMAIL_PRODUCTION_DEV_RECIPIENT.
+🎯 We want to prevent misfires to recipients when operating in non-production environments, so we will override the recipients with the developer's address if it's defined, otherwise a configured `MACMAIL_PRODUCTION_DEV_RECIPIENT`.
 
-🕵️ We also want to add a configured MACMAIL_PRODUCTION_DEV_RECIPIENT as a blind carbon copy on everything we send out for auditing purposes.
+🕵️ We also want to add a configured `MACMAIL_PRODUCTION_DEV_RECIPIENT` as a blind carbon copy on everything we send out for auditing purposes.
 
 #### Body
 
-`composeBody` is the main function of [the body utilities](src/mail/body.mail.util.ts).
+`composeBody()` is the main function of [the body utilities](src/mail/body.mail.util.ts).
 
-The body is required to render [a letter](#letters) merged with data. Preferrably the body content type is HTML, but plain text is available.
+The body is required to render [a letter](#letters) merged with data. Preferably the body content type is HTML, but plain text is available.
 
 If the email has mixed content, the body section must have its own Content-Type headers and boundary.
 
@@ -223,7 +225,7 @@ If the email has mixed content, the body section must have its own Content-Type 
 
 📖 In this context, we refer to **files** as inputs and **attachments** as outputs.
 
-`composeAttachments` is the main function of [the attachment utilities](src/mail/attachment.mail.util.ts).
+`composeAttachments()` is the main function of [the attachment utilities](src/mail/attachment.mail.util.ts).
 
 SMTP-compliant attachments contain the following information:
 - The file name.
@@ -236,7 +238,7 @@ An attachment will always have a boundary because email's content type will alwa
 
 ### Letters
 
-The objective of letter utilities is to faciliate the composition and formatting of letters to serve over SMTP.
+The objective of letter utilities is to facilitate the composition and formatting of letters to serve over SMTP.
 
 [`render`](src/letter/letter.util.ts) serves as the main function of the utilities in this directory.
 
