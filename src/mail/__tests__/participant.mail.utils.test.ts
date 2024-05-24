@@ -232,17 +232,16 @@ describe('Paricipant utility tests', function testParticipantUtilities() {
     });
     describe('When ENV is production', () => {
       it('should return the configured production dev recipient', async () => {
-        process.env.ENV = globals.ENVS.PRODUCTION;
+        process.env.MACMAIL_OVERRIDE_RECIPIENTS = 'false';
         const module = await import('../participant.mail.util');
         const devRecipient = await module.participantMailUtil.getDevRecipient();
         expect(devRecipient).toBe(ADDRESSES.DEV);
       });
     });
     describe('When ENV is NOT production', () => {
-      describe('and MACMAIL_MY_EMAIL_ADDRESS and MACMAIL_MY_NAME are falsey', () => {
+      describe('and MACMAIL_MY_EMAIL_ADDRESS and MACMAIL_MY_NAME are falsy', () => {
         it('should return the configured production dev recipient', async () => {
-          process.env.ENV = globals.ENVS.LOCAL;
-          process.env.MACMAIL_MY_EMAIL_ADDRESS = '';
+          process.env.MACMAIL_OVERRIDE_RECIPIENTS = 'true';
           process.env.MACMAIL_MY_NAME = '';
           const module = await import('../participant.mail.util');
           const devRecipient =
@@ -252,8 +251,9 @@ describe('Paricipant utility tests', function testParticipantUtilities() {
       });
       describe('and MACMAIL_MY_EMAIL_ADDRESS is truthy and MACMAIL_MY_NAME is falsey', () => {
         it('should return MACMAIL_MY_EMAIL_ADDRESS', async () => {
-          process.env.ENV = globals.ENVS.LOCAL;
-          process.env.MACMAIL_MY_EMAIL_ADDRESS = ADDRESSES.TEST as string;
+          process.env.MACMAIL_OVERRIDE_RECIPIENTS = 'true';
+          process.env.MACMAIL_MY_EMAIL_ADDRESS =
+            ADDRESSES.TEST as `${string}@${string}.${string}`;
           process.env.MACMAIL_MY_NAME = '';
           const module = await import('../participant.mail.util');
           const devRecipient =
@@ -263,7 +263,7 @@ describe('Paricipant utility tests', function testParticipantUtilities() {
       });
       describe('and MACMAIL_MY_EMAIL_ADDRESS and MACMAIL_MY_NAME are truthy', () => {
         it('should return an username-address combo', async () => {
-          process.env.ENV = globals.ENVS.LOCAL;
+          process.env.MACMAIL_OVERRIDE_RECIPIENTS = 'true';
           process.env.MACMAIL_MY_EMAIL_ADDRESS =
             USERNAME_ADDRESSES.HARRY.address;
           process.env.MACMAIL_MY_NAME = USERNAME_ADDRESSES.HARRY.username;

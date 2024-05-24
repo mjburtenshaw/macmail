@@ -39,9 +39,9 @@ function isSmtpParticipant(candidate: any): candidate is SmtpParticipant {
 
 function getDevRecipient() {
   const {
-    ENV,
     MACMAIL_MY_EMAIL_ADDRESS,
     MACMAIL_MY_NAME,
+    MACMAIL_OVERRIDE_RECIPIENTS,
     MACMAIL_PRODUCTION_DEV_RECIPIENT,
   } = process.env;
   let meRecipient: SmtpParticipant =
@@ -54,7 +54,7 @@ function getDevRecipient() {
     };
   }
   const devRecipient =
-    ENV === 'production'
+    MACMAIL_OVERRIDE_RECIPIENTS === 'false'
       ? (MACMAIL_PRODUCTION_DEV_RECIPIENT as MailAddress)
       : meRecipient;
   return devRecipient;

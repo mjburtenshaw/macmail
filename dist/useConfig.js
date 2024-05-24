@@ -15,21 +15,33 @@ async function readConfig() {
         return config;
     }
     catch (err) {
-        throw new Error(`macmail: 💀 Error reading configuration: ${err.message}`);
+        throw new Error(`macmail: 💀  Error reading configuration: ${err.message}`);
     }
 }
 function applyConfig(config) {
     try {
+        const foundKeys = [];
         for (const key in config) {
             if (Object.hasOwnProperty.call(config, key)) {
                 const macmailKey = `MACMAIL_${key.toUpperCase()}`;
                 const configValue = config[key];
                 process.env[macmailKey] = configValue;
+                foundKeys.push(macmailKey);
             }
         }
+        const requiredKeys = [
+            'MACMAIL_OVERRIDE_RECIPIENTS',
+            'MACMAIL_PRODUCTION_DEV_RECIPIENT',
+            'MACMAIL_SOURCE_DIR',
+        ];
+        requiredKeys.forEach((requiredKey) => {
+            if (!foundKeys.includes(requiredKey)) {
+                throw new Error(`Missing required config ${requiredKey}: Please add this to your macmail.config.yml file.`);
+            }
+        });
     }
     catch (err) {
-        throw new Error(`macmail: 💀 Error applying configuration: ${err.message}`);
+        throw new Error(`macmail: 💀  Error applying configuration: ${err.message}`);
     }
 }
 async function useConfig() {

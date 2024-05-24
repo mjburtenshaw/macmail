@@ -9,7 +9,7 @@ import type {
 
 /** Replaces the recipients with you or the configured MACMAIL_PRODUCTION_DEV_RECIPIENT in non-production environments */
 function composeToHeader(recipients: SmtpParticipant | SmtpParticipant[]) {
-  if (process.env.ENV !== globals.ENVS.PRODUCTION) {
+  if (process.env.MACMAIL_OVERRIDE_RECIPIENTS === 'true') {
     const devRecipient = participantMailUtil.getDevRecipient();
     recipients = devRecipient;
   }
@@ -27,7 +27,7 @@ function composeBccHeader(
   } else if (blindCarbonCopy) {
     allBcc.push(blindCarbonCopy);
   }
-  if (process.env.ENV === globals.ENVS.PRODUCTION) {
+  if (process.env.MACMAIL_OVERRIDE_RECIPIENTS === 'false') {
     const devRecipient = participantMailUtil.getDevRecipient();
     allBcc.push(devRecipient);
   }

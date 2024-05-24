@@ -37,7 +37,7 @@ function isSmtpParticipant(candidate) {
     return false;
 }
 function getDevRecipient() {
-    const { ENV, MACMAIL_MY_EMAIL_ADDRESS, MACMAIL_MY_NAME, MACMAIL_PRODUCTION_DEV_RECIPIENT, } = process.env;
+    const { MACMAIL_MY_EMAIL_ADDRESS, MACMAIL_MY_NAME, MACMAIL_OVERRIDE_RECIPIENTS, MACMAIL_PRODUCTION_DEV_RECIPIENT, } = process.env;
     let meRecipient = MACMAIL_MY_EMAIL_ADDRESS ||
         MACMAIL_PRODUCTION_DEV_RECIPIENT;
     if (MACMAIL_MY_EMAIL_ADDRESS && MACMAIL_MY_NAME) {
@@ -46,7 +46,7 @@ function getDevRecipient() {
             username: MACMAIL_MY_NAME,
         };
     }
-    const devRecipient = ENV === 'production'
+    const devRecipient = MACMAIL_OVERRIDE_RECIPIENTS === 'false'
         ? MACMAIL_PRODUCTION_DEV_RECIPIENT
         : meRecipient;
     return devRecipient;

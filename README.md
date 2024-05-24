@@ -3,7 +3,7 @@ macmail
 
 A library to streamline the composition of SMTP compliant emails using react-email templates to send off to mail vendors.
 
-![Static Badge](https://img.shields.io/badge/version-1.1.10-66023c)
+![Static Badge](https://img.shields.io/badge/version-2.0.0-66023c)
 
 Table of Contents
 ------------------
@@ -35,6 +35,12 @@ Add a `macmail.config.yml` to your project's root directory:
 ```yaml
 # Required. An email address appended to BCC headers on production environments.
 production_dev_recipient: dev.team@example.com
+
+# Required. Overrides recipients with configured recipients (production_dev_recipient or my_email_address) when true to protect against false firings. This should be false in production environments.
+override_recipients: true
+
+# Required. The directory from which your application is being run from. Typically `src`, `dist`, `build`, etc.
+source_dir: src
 
 # Optional. An email address only used in non-production environments.
 my_email_address: me@example.com
