@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LETTERS = void 0;
+exports.indexLetters = exports.LETTERS = void 0;
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 async function findLetterFiles(directory) {
@@ -48,4 +48,4 @@ async function indexLetters() {
     }, {});
     exports.LETTERS = letters;
 }
-indexLetters();
+exports.indexLetters = indexLetters;

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import type { Letters, LetterModule } from './letter.types';
+import type { LetterModule, Letters } from './letter.types';
 
 async function findLetterFiles(directory: string) {
   const letterFiles = [];
@@ -35,7 +35,7 @@ async function importLetterModules(letterFiles: string[]) {
 
 export var LETTERS: Letters;
 
-async function indexLetters() {
+export async function indexLetters() {
   const srcDir = path.resolve(process.cwd(), process.env.MACMAIL_SOURCE_DIR);
   const letterFiles = await findLetterFiles(srcDir);
   const letterModules = await importLetterModules(letterFiles);
@@ -49,5 +49,3 @@ async function indexLetters() {
   }, {});
   LETTERS = letters;
 }
-
-indexLetters();
