@@ -1,15 +1,15 @@
-import { promises as fsPromises } from 'fs';
-import path from 'path';
+import fs from 'fs';
 import yaml from 'js-yaml';
+import path from 'path';
 
 type MacmailConfig = {
   [key: string]: string;
 };
 
 async function readConfig() {
-  const configFilePath = path.resolve(process.cwd(), 'macmail.config.yml');
   try {
-    const rawConfig = await fsPromises.readFile(configFilePath, 'utf8');
+    const configFilePath = path.resolve(process.cwd(), 'macmail.config.yml');
+    const rawConfig = await fs.promises.readFile(configFilePath, 'utf8');
     const config = yaml.load(rawConfig) as MacmailConfig;
     return config;
   } catch (err) {

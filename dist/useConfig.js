@@ -4,13 +4,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useConfig = void 0;
-const fs_1 = require("fs");
-const path_1 = __importDefault(require("path"));
+const fs_1 = __importDefault(require("fs"));
 const js_yaml_1 = __importDefault(require("js-yaml"));
+const path_1 = __importDefault(require("path"));
 async function readConfig() {
-    const configFilePath = path_1.default.resolve(process.cwd(), 'macmail.config.yml');
     try {
-        const rawConfig = await fs_1.promises.readFile(configFilePath, 'utf8');
+        const configFilePath = path_1.default.resolve(process.cwd(), 'macmail.config.yml');
+        const rawConfig = await fs_1.default.promises.readFile(configFilePath, 'utf8');
         const config = js_yaml_1.default.load(rawConfig);
         return config;
     }
