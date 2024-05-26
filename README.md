@@ -1,12 +1,10 @@
-macmail
-=======
+# macmail
 
 A library to streamline the composition of SMTP compliant emails using react-email templates to send off to mail vendors.
 
 ![Static Badge](https://img.shields.io/badge/version-3.0.0-66023c)
 
-Table of Contents
-------------------
+## Table of Contents
 
 - [Installation](#installation)
 - [Configuration](#configuration)
@@ -20,15 +18,13 @@ Table of Contents
   - [Letters](#letters)
 - [See Also](#see-also)
 
-Installation
-------------
+## Installation
 
 ```shell
 npm install @mjburtenshaw/macmail
 ```
 
-Configuration
--------------
+## Configuration
 
 Add a `macmail.config.yml` to your project's root directory:
 
@@ -53,8 +49,7 @@ Our config will magically index files in your project ending in `.letter.tsx`.
 
 See [Letters](#letters) for details on configuring letter templates. 
 
-Usage
-------
+## Usage
 
 [`composeMessage()`](src/mail/message.mail.util.ts) is the main function of the library:
 
@@ -166,8 +161,7 @@ async function useMacmail(file: Express.Multer.File) {
 
 ```
 
-Library
--------
+## Library
 
 ### Mail
 
@@ -254,8 +248,7 @@ A letter template MUST have the following properties:
 - An array of strings matching the keys of required component props assigned to a constant named `requiredProps` as a named export.
 - A PascalCase filename followed by `.letter.tsx`, e.g. `FooBar.letter.tsx`
 
-See Also
---------
+## See Also
 
 - [RFC 5321](https://datatracker.ietf.org/doc/html/rfc5321)
 - [Multer](https://github.com/expressjs/multer#readme)
