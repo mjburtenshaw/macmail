@@ -1,6 +1,9 @@
 import { buildRenderOptions, validateProps } from '../letter.util';
 import { LETTER_NAME } from './Test.letter';
 
+// Stop async imports from throwing errors
+jest.mock('../letter.constants', () => ({}));
+
 describe('Letter utility tests: ', function testLetterUtilities() {
   describe('validateProps tests', function testValidateProps() {
     const DEFAULT_REQUIRED_PROPS = ['foo', 'bar'];
