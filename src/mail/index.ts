@@ -10,4 +10,5 @@ export const mail = {
   buildAttachment: attachmentMailUtil.buildAttachment,
   composeMessage: messageMailUtil.composeMessage,
   isMailAddress: participantMailUtil.isMailAddress,
+  isSmtpParticipant: participantMailUtil.isSmtpParticipant,
 };

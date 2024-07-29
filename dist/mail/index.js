@@ -33,4 +33,5 @@ exports.mail = {
     buildAttachment: attachment_mail_util_1.attachmentMailUtil.buildAttachment,
     composeMessage: message_mail_util_1.messageMailUtil.composeMessage,
     isMailAddress: participant_mail_util_1.participantMailUtil.isMailAddress,
+    isSmtpParticipant: participant_mail_util_1.participantMailUtil.isSmtpParticipant,
 };
