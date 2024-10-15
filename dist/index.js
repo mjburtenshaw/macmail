@@ -12,11 +12,10 @@ async function main() {
     await indexLetters();
 }
 main();
-const letter = letterPublicExports;
-const mail = mail_1.mail;
 const macmail = {
-    letter,
-    mail,
+    letter: letterPublicExports,
+    mail: mail_1.mail,
 };
 // CommonJS export syntax allows EcmaScript default imports to work after it's compiled.
 module.exports = macmail;
+module.exports.default = macmail;
