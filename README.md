@@ -2,7 +2,7 @@
 
 A library to streamline the composition of SMTP compliant emails using react-email templates to send off to mail vendors.
 
-![Static Badge](https://img.shields.io/badge/version-5.0.1-66023c)
+![Static Badge](https://img.shields.io/badge/version-6.0.0-66023c)
 
 ## Table of Contents
 
