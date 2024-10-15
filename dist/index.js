@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.macmail = void 0;
 const letter_1 = require("./letter");
 const mail_1 = require("./mail");
 const useConfig_1 = require("./useConfig");
@@ -13,10 +12,11 @@ async function main() {
     await indexLetters();
 }
 main();
-/** @warning Do NOT use this as a named import! The named export only exists for type completion. Use this as a default import */
-exports.macmail = {
-    letter: letterPublicExports,
-    mail: mail_1.mail,
+const letter = letterPublicExports;
+const mail = mail_1.mail;
+const macmail = {
+    letter,
+    mail,
 };
 // CommonJS export syntax allows EcmaScript default imports to work after it's compiled.
-module.exports = exports.macmail;
+module.exports = macmail;

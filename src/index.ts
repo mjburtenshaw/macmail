@@ -1,10 +1,10 @@
-import { letter } from './letter';
-import { mail } from './mail';
+import { letter as _letter } from './letter';
+import { mail as _mail } from './mail';
 import { useConfig } from './useConfig';
 import { validateEnv } from './validateEnv';
 
 // `indexLetters` is not intended for external invocation.
-const { indexLetters, ...letterPublicExports } = letter;
+const { indexLetters, ...letterPublicExports } = _letter;
 
 async function main() {
   await useConfig();
@@ -14,12 +14,15 @@ async function main() {
 
 main();
 
-/** @warning Do NOT use this as a named import! The named export only exists for type completion. Use this as a default import */
-export const macmail = {
-  letter: letterPublicExports,
+const letter = letterPublicExports;
+const mail = _mail;
+
+const macmail = {
+  letter,
   mail,
 };
 
+export type { mail, letter };
 export type * from './letter';
 export type * from './mail';
 
