@@ -3,24 +3,21 @@ import { mail } from './mail';
 import { useConfig } from './useConfig';
 import { validateEnv } from './validateEnv';
 
-// `indexLetters` is not intended for external invocation.
-const { indexLetters, ...letterPublicExports } = letter;
-
-async function main() {
+async function init() {
   await useConfig();
   validateEnv();
-  indexLetters();
+
+  const { indexLetters, ...letterPublicExports } = letter;
+  await indexLetters();
+
+  return {
+    letter: letterPublicExports,
+    mail,
+  };
 }
-
-main();
-
-export const macmail = {
-  letter: letterPublicExports,
-  mail,
-};
 
 export type * from './letter';
 export type * from './mail';
 
 // CommonJS export syntax allows EcmaScript default imports to work after it's compiled.
-module.exports = macmail;
+module.exports = init;
