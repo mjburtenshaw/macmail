@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.init = void 0;
 const letter_1 = require("./letter");
 const mail_1 = require("./mail");
 const useConfig_1 = require("./useConfig");
@@ -14,5 +15,6 @@ async function init() {
         mail: mail_1.mail,
     };
 }
+exports.init = init;
 // CommonJS export syntax allows EcmaScript default imports to work after it's compiled.
 module.exports = init;

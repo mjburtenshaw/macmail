@@ -3,7 +3,7 @@ import { mail } from './mail';
 import { useConfig } from './useConfig';
 import { validateEnv } from './validateEnv';
 
-async function init() {
+export async function init() {
   await useConfig();
   validateEnv();
 
