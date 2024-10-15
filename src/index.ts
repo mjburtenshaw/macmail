@@ -14,7 +14,8 @@ async function main() {
 
 main();
 
-const macmail = {
+/** @warning Do NOT use this as a named import! The named export only exists for type completion. Use this as a default import */
+export const macmail = {
   letter: letterPublicExports,
   mail,
 };
